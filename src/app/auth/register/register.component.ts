@@ -34,7 +34,7 @@ export class RegisterComponent {
 
 		this.usuarioService.crearUsuario(this.registerForm.value).subscribe(resp => {
 			this.usuarioService.login(this.registerForm.value).subscribe((resp : any) => {
-				this.router.navigateByUrl('/');
+				this.router.navigateByUrl('/dashboard');
 				Swal.fire('¡Bien!','usuario creado', 'success');
 			}, (err) => Swal.fire('Error',err.error.msg, 'error'));
 		},(err) => Swal.fire('Error',err.error.msg, 'error'));

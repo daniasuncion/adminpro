@@ -1,5 +1,5 @@
 import Swal from 'sweetalert2';
-import {Component, OnInit} from '@angular/core';
+import {Component, NgZone, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {FormBuilder, Validators} from "@angular/forms";
 import {UsuarioService} from "../../services/usuario.service";
@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit{
 	public formSubmitted = false;
 	public auth2:any;
 
+
 	public loginForm = this.fb.group({
 		email: ['', [ Validators.required , Validators.email],  ],
 		password: ['', [ Validators.required ],  ],
@@ -24,14 +25,14 @@ export class LoginComponent implements OnInit{
 	});
 
 
-  constructor(private router : Router, private fb: FormBuilder, private usuarioService : UsuarioService) { }
+  constructor(private router : Router, private fb: FormBuilder, private usuarioService : UsuarioService,private ngZone: NgZone) { }
 
 	login(){
 		if(this.loginForm.invalid){
 			Swal.fire('Error','Por favor, rellene los campos requeridos con un formato válido', 'error')
 		}
 		this.usuarioService.login(this.loginForm.value).subscribe((resp : any) => {
-				this.router.navigateByUrl('/')
+				this.router.navigateByUrl('/dashboard')
 		}, (err) => Swal.fire('Error',err.error.msg, 'error'));
 
 	}
@@ -66,7 +67,9 @@ export class LoginComponent implements OnInit{
 			(googleUser) => {
 				var id_token = googleUser.getAuthResponse().id_token;
 				this.usuarioService.loginGoogle(id_token).subscribe((resp : any) => {
-					this.router.navigateByUrl('/')
+					this.ngZone.run(() => {
+						this.router.navigateByUrl('/dashboard');
+					})
 				}, (err) => Swal.fire('Error',err.error.msg, 'error'));
 			}, function(error) {
 				Swal.fire('Error',error, 'error')

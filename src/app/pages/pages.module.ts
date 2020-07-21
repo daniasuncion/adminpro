@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 import {DashboardComponent} from "./dashboard/dashboard.component";
 import {ProgressComponent} from "./progress/progress.component";
@@ -15,6 +15,8 @@ import {GraficoDonaComponent} from "../components/grafico-dona/grafico-dona.comp
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { PromesasComponent } from './promesas/promesas.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
+import { PerfilComponent } from './perfil/perfil.component';
+import {BrowserModule} from "@angular/platform-browser";
 
 @NgModule({
     declarations: [
@@ -26,7 +28,8 @@ import { RxjsComponent } from './rxjs/rxjs.component';
 			GraficoDonaComponent,
 			AccountSettingsComponent,
 			PromesasComponent,
-			RxjsComponent
+			RxjsComponent,
+			PerfilComponent
     ],
     exports: [
 			DashboardComponent,
@@ -37,7 +40,9 @@ import { RxjsComponent } from './rxjs/rxjs.component';
 			SharedModule,
 			PagesRoutingModule,
 			FormsModule,
-			ChartsModule
+			ChartsModule,
+			ReactiveFormsModule,
+			BrowserModule
     ]
 })
 export class PagesModule {}

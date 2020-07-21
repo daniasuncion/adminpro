@@ -21,7 +21,7 @@ export class BreadcrumbsComponent implements OnDestroy{
   	this.tituloSubs$ = this.getDataRuta()
 															.subscribe( data => { // ({titulo}) objeto data desestructurado (solo cojo lo que me interesa del parametro que llega)
 																this.titulo = data.titulo;
-																console.log(data)
+																//console.log(data)
 																document.title = `AdminPro - ${data.titulo}`;
 															});
 	}
